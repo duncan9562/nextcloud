@@ -1,0 +1,30 @@
+pipeline:
+
+  pull-docker-image:
+    image: docker
+    commands:
+      - docker pull nextcloud
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      event: push
+
+  create-volume:
+    image: docker
+    commands:
+      - docker create volume nextcloud
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      event: push
+
+  deploy-container:
+    image: docker
+    commands:
+      - docker stop nextcloud
+      - docker rm nextcloud
+      - docker run -tid --name nextcloud -v nextcloud:/var/www/html -p 8084:80
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    when:
+      event: push
