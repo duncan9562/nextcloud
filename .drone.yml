@@ -23,7 +23,7 @@ pipeline:
     commands:
       - docker stop nextcloud || true
       - docker rm nextcloud || true
-      - docker run -tid --name nextcloud -v nextcloud:/var/www/html -p 8084:80
+      - docker run -tid --name nextcloud -v nextcloud:/var/www/html -p 8084:80 nextcloud
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     when:
