@@ -21,8 +21,8 @@ pipeline:
   deploy-container:
     image: docker
     commands:
-      - docker stop nextcloud
-      - docker rm nextcloud
+      - docker stop nextcloud || true
+      - docker rm nextcloud || true
       - docker run -tid --name nextcloud -v nextcloud:/var/www/html -p 8084:80
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
