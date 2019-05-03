@@ -12,7 +12,7 @@ pipeline:
   create-volume:
     image: docker
     commands:
-      - docker create volume nextcloud
+      - docker volume create nextcloud-storage
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     when:
