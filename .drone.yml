@@ -15,7 +15,7 @@ pipeline:
     commands:
       - docker stop nextcloud || true
       - docker rm nextcloud || true
-      - docker run -tid --name nextcloud -v /mnt/6tb/docker/opt/nextcloud:/var/www/html --user 1000:1000 -p 8084:80 nextcloud:15.0.12
+      - docker run -tid --name nextcloud -v /mnt/6tb/docker/opt/nextcloud:/var/www/html -p 8084:80 nextcloud:15.0.12
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     when:
