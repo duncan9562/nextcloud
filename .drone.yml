@@ -1,18 +1,10 @@
 pipeline:
 
   pull-docker-image:
+    pull: true
     image: docker
     commands:
       - docker pull nextcloud
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    when:
-      event: push
-
-  create-volume:
-    image: docker
-    commands:
-      - docker volume create nextcloud-storage
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     when:
@@ -23,7 +15,7 @@ pipeline:
     commands:
       - docker stop nextcloud || true
       - docker rm nextcloud || true
-      - docker run -tid --name nextcloud -v nextcloud:/var/www/html -p 8084:80 nextcloud
+      - docker run -tid --name nextcloud -v /mnt/6tb/docker/opt/nextcloud:/var/www/html -p 8084:80 nextcloud
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     when:
